@@ -517,6 +517,11 @@
                 grid-template-columns: repeat(2, 1fr) !important;
             }
         }
+        @media (max-width: 768px) {
+            .pillars-grid, .pillars-grid[style] {
+                grid-template-columns: 1fr !important;
+            }
+        }
 
         .pillar {
             background-color: var(--black);
@@ -659,6 +664,14 @@
         @media (max-width: 768px) {
             .testimonials-grid {
                 grid-template-columns: 1fr;
+            }
+            /* On mobile: show only the first testimonial by default */
+            .testimonials-grid .testimonial-card:nth-child(n+2) {
+                display: none;
+            }
+            /* Show all when expanded */
+            .testimonials-grid.show-all .testimonial-card:nth-child(n+2) {
+                display: flex;
             }
             .testimonials-grid .testimonial-card.testimonial-hidden {
                 display: none;
@@ -1925,10 +1938,12 @@
                 font-size: 15px;
             }
 
-            /* Bio photo — full width on mobile, shorter aspect */
+            /* Bio photo — square crop on mobile */
             .bio-photo {
-                aspect-ratio: 4 / 3;
-                max-height: 320px;
+                aspect-ratio: 1 / 1;
+                max-height: 360px;
+                width: 100%;
+                object-position: center top;
             }
 
             /* Process flow wraps on small screens */
@@ -2999,7 +3014,7 @@
                     <!-- SACRED ARCHITECTURE -->
                     <!-- Nano Banana: "Contemporary Islamic community center, geometric facade, warm stone and concrete, Long Island New York, architectural photography" -->
                     <div class="portfolio-card reveal" data-category="sacred">
-                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1564069114553-7215e50af4b7?auto=format&fit=crop&w=800&q=80');">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80');">
                             <div class="card-content">
                                 <div class="card-eyebrow">SACRED ARCHITECTURE</div>
                                 <div class="card-title">Long Island Islamic Center</div>
@@ -3009,9 +3024,8 @@
                         </div>
                     </div>
 
-                    <!-- Nano Banana: "Mosque expansion addition, graceful minaret, prayer hall with high ceilings, warm light, urban New York setting, architectural photography" -->
                     <div class="portfolio-card reveal" data-category="sacred">
-                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1685736382860-1dece54f73de?auto=format&fit=crop&w=800&q=80');">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1574236170880-0e57f1fd13a2?auto=format&fit=crop&w=800&q=80');">
                             <div class="card-content">
                                 <div class="card-eyebrow">SACRED ARCHITECTURE</div>
                                 <div class="card-title">Queens Community Mosque Expansion</div>
@@ -3021,9 +3035,8 @@
                         </div>
                     </div>
 
-                    <!-- Nano Banana: "Large Turkish cultural center and mosque, grand domed architecture, warm stone facade, Brooklyn New York, community gathering spaces, architectural photography" -->
                     <div class="portfolio-card reveal" data-category="sacred">
-                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1685736383398-7f82cea3e919?auto=format&fit=crop&w=800&q=80');">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80');">
                             <div class="card-content">
                                 <div class="card-eyebrow">SACRED ARCHITECTURE</div>
                                 <div class="card-title">Turkish Cultural Center &amp; Mosque</div>
@@ -3033,9 +3046,8 @@
                         </div>
                     </div>
 
-                    <!-- Nano Banana: "Contemporary mosque interior Istanbul, intricate geometric light patterns, soaring white arches, marble floor, ethereal spiritual atmosphere" -->
                     <div class="portfolio-card reveal" data-category="sacred">
-                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1579275542618-a1dfed5f54ba?auto=format&fit=crop&w=800&q=80');">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?auto=format&fit=crop&w=800&q=80');">
                             <div class="card-content">
                                 <div class="card-eyebrow">SACRED ARCHITECTURE</div>
                                 <div class="card-title">International Mosque Commission</div>
@@ -3045,9 +3057,8 @@
                         </div>
                     </div>
 
-                    <!-- Nano Banana: "Serene mosque exterior, clean sandstone facade, arched entrance, manicured courtyard, New Jersey suburban setting, architectural photography" -->
                     <div class="portfolio-card reveal" data-category="sacred">
-                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1669635325311-5b4c55617e39?auto=format&fit=crop&w=800&q=80');">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=80');">
                             <div class="card-content">
                                 <div class="card-eyebrow">SACRED ARCHITECTURE</div>
                                 <div class="card-title">New Jersey Islamic Foundation</div>
@@ -3057,9 +3068,8 @@
                         </div>
                     </div>
 
-                    <!-- Nano Banana: "Contemporary community cultural center, light-filled interior, flexible gathering hall, warm wood and concrete, Brentwood New York" -->
                     <div class="portfolio-card reveal" data-category="sacred">
-                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1677653780473-5f9c5e7d7517?auto=format&fit=crop&w=800&q=80');">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?auto=format&fit=crop&w=800&q=80');">
                             <div class="card-content">
                                 <div class="card-eyebrow">SACRED ARCHITECTURE</div>
                                 <div class="card-title">Suffolk County Islamic Cultural Center</div>
@@ -3352,6 +3362,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             const reveals = document.querySelectorAll('.reveal');
             reveals.forEach(el => revealObserver.observe(el));
+            // Hard fallback: after 600ms force-show any reveals that the
+            // IntersectionObserver missed (e.g. elements in hidden pages,
+            // or browsers that throttle the observer on load).
+            setTimeout(function() {
+                document.querySelectorAll('.reveal:not(.visible)').forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }, 600);
         });
 
         // Counter animation for stats
