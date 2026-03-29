@@ -795,6 +795,108 @@
       gap: 2rem;
     }
 
+    /* Video badge on portfolio cards */
+    .card-video-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(10,10,10,0.75);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.75rem;
+      border-radius: 2px;
+      z-index: 2;
+      backdrop-filter: blur(4px);
+    }
+
+    .video-portfolio-card .card-overlay::before {
+      content: '▶';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      font-size: 1.1rem;
+      opacity: 0;
+      transition: opacity 0.3s var(--ease-out);
+      line-height: 52px;
+      text-align: center;
+    }
+
+    .video-portfolio-card:hover .card-overlay::before {
+      opacity: 1;
+    }
+
+    /* Process Section */
+    .process-section {
+      padding: var(--section-v) var(--gutter);
+      background: var(--charcoal);
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .process-step {
+      position: relative;
+      padding-top: 1.5rem;
+      border-top: 2px solid var(--border-dim);
+      transition: border-color 0.3s;
+    }
+
+    .process-step:hover {
+      border-color: var(--gold);
+    }
+
+    .process-num {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.35;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+      font-family: var(--font-body);
+    }
+
+    .process-step h3 {
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .process-step p {
+      color: var(--muted-light);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .card-img-coming-soon {
       background: #111 !important;
       background-image: none !important;
@@ -1984,7 +2086,6 @@
     <!-- TAB BAR -->
     <div class="tab-bar">
       <button class="tab-btn active" onclick="switchTab('projects', this)">Projects</button>
-      <button class="tab-btn" onclick="switchTab('videos', this)">Video Library</button>
       <button class="tab-btn" onclick="switchTab('downloads', this)">Portfolio Downloads</button>
     </div>
 
@@ -2007,58 +2108,64 @@
         -->
 
         <div class="portfolio-grid" id="portfolioGrid">
-          <!-- RESIDENTIAL -->
-          <div class="portfolio-card reveal" data-category="residential">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80')"></div>
+          <!-- RESIDENTIAL — real project films (Blaze Makoid Architecture) -->
+          <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('nTbdcpO0y9w','Sagaponack Compound')" style="cursor:pointer;">
+            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/nTbdcpO0y9w/maxresdefault.jpg')"></div>
+            <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
-              <div class="card-title">East Hampton Estate</div>
-              <div class="card-meta">East Hampton, NY<br>8,400 sf · New Construction · Architecture A–Z · Landscape · Lighting · MLS Media</div>
+              <div class="card-title">Sagaponack Compound</div>
+              <div class="card-meta">Sagaponack, NY · Multi-Structure Estate</div>
             </div>
           </div>
 
-          <div class="portfolio-card reveal" data-category="residential">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80')"></div>
+          <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('QoRXJ4EB5nc','Southampton Oceanfront')" style="cursor:pointer;">
+            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/QoRXJ4EB5nc/maxresdefault.jpg')"></div>
+            <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
-              <div class="card-title">Bridgehampton Waterfront</div>
-              <div class="card-meta">Bridgehampton, NY<br>12,000 sf · New Construction · Full Architecture · Pool Design · Smart Home · Aerial</div>
+              <div class="card-title">Southampton Oceanfront</div>
+              <div class="card-meta">Southampton, NY · Waterfront Estate</div>
             </div>
           </div>
 
-          <div class="portfolio-card reveal" data-category="residential">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80')"></div>
+          <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('4YG90yuLRqE','Calf Creek')" style="cursor:pointer;">
+            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/4YG90yuLRqE/maxresdefault.jpg')"></div>
+            <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
-              <div class="card-title">Southampton Modern</div>
-              <div class="card-meta">Southampton, NY<br>6,200 sf · New Construction · Architecture + Interior · Landscape · Lighting · Award-Winning</div>
+              <div class="card-title">Calf Creek</div>
+              <div class="card-meta">Hamptons, NY · New Construction</div>
             </div>
           </div>
 
-          <div class="portfolio-card reveal" data-category="residential">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80')"></div>
+          <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('BUqHnnqEEHM','Sag Harbor Bay')" style="cursor:pointer;">
+            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/BUqHnnqEEHM/maxresdefault.jpg')"></div>
+            <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
-              <div class="card-title">Sagaponack Family Compound</div>
-              <div class="card-meta">Sagaponack, NY<br>18,500 sf · Multi-Structure · Main Residence + Guest Cottage + Pool House</div>
+              <div class="card-title">Sag Harbor Bay</div>
+              <div class="card-meta">Sag Harbor, NY · Bayfront Estate</div>
             </div>
           </div>
 
-          <div class="portfolio-card reveal" data-category="residential">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80')"></div>
+          <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('b-qBq0AmVo0','Shooting Star')" style="cursor:pointer;">
+            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/b-qBq0AmVo0/maxresdefault.jpg')"></div>
+            <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
-              <div class="card-title">Montauk Cliffside Retreat</div>
-              <div class="card-meta">Montauk, NY<br>5,400 sf · Renovation + Addition · Structural · Landscape · Sustainability</div>
+              <div class="card-title">Shooting Star</div>
+              <div class="card-meta">Hamptons, NY · Luxury Estate</div>
             </div>
           </div>
 
-          <div class="portfolio-card reveal" data-category="residential">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80')"></div>
+          <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('1yQ68U4sHb8','Ferry Road')" style="cursor:pointer;">
+            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/1yQ68U4sHb8/maxresdefault.jpg')"></div>
+            <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
-              <div class="card-label">Luxury Residential</div>
-              <div class="card-title">Pacific Villa</div>
-              <div class="card-meta">Cabo San Lucas, Mexico<br>9,200 sf · New Construction · Cross-Border · Full Architecture</div>
+              <div class="card-label">Ultra-Luxury Residential</div>
+              <div class="card-title">Ferry Road</div>
+              <div class="card-meta">Hamptons, NY · Waterfront Residence</div>
             </div>
           </div>
 
@@ -2175,82 +2282,11 @@
         </div>
 
         <p style="text-align: center; color: var(--muted-light); margin-top: 3rem; font-size: 0.95rem;">Photography and full case studies available upon request.</p>
+        <p style="text-align: center; color: var(--muted); margin-top: 1rem; font-size: 0.78rem; line-height: 1.6;">Residential films © <a href="https://blazemakoid.com" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Blaze Makoid Architecture</a>. Shared to illustrate project scale, design caliber, and construction quality representative of my contributions during tenure at BMA.</p>
       </div>
     </div>
 
-    <!-- TAB 2: VIDEO LIBRARY -->
-    <div id="videos" class="tab-content">
-      <div class="container">
-        <h2>Architecture in Motion</h2>
-        <p style="color: var(--muted-light); margin-bottom: 2rem; font-size: 1rem;">Documenting spaces that earn their place in the landscape.</p>
-
-        <!-- ATTRIBUTION NOTICE -->
-        <div style="background: rgba(201,169,110,0.07); border: 1px solid rgba(201,169,110,0.25); border-radius: 2px; padding: 1.25rem 1.5rem; margin-bottom: var(--section-v); display: flex; gap: 1rem; align-items: flex-start;">
-          <span style="color: var(--gold); font-size: 1.1rem; line-height: 1; flex-shrink: 0; margin-top: 0.1rem;">ⓘ</span>
-          <p style="color: var(--muted-light); font-size: 0.875rem; line-height: 1.7; margin: 0;">
-            <strong style="color: var(--white); font-weight: 600;">Video credit: Blaze Makoid Architecture (BMA)</strong> —
-            The projects featured in these videos were produced by and remain the property of
-            <a href="https://blazemakoid.com" target="_blank" rel="noopener" style="color: var(--gold); text-decoration: none;">Blaze Makoid Architecture</a>.
-            They are shared here solely to illustrate the caliber of work, scale of projects, and level of design detail
-            that I contributed to during my tenure at BMA. These videos represent the type of client,
-            program, and construction quality I bring to every engagement — not independent commissions of my own.
-          </p>
-        </div>
-
-        <div class="video-grid">
-          <div class="video-card" onclick="playVideo('nTbdcpO0y9w', 'Sagaponack Compound')">
-            <img src="https://img.youtube.com/vi/nTbdcpO0y9w/maxresdefault.jpg" alt="Sagaponack Compound" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-            <div class="video-play-btn">
-              <div class="video-play-icon">▶</div>
-            </div>
-            <div class="video-title">Sagaponack Compound</div>
-          </div>
-          <div class="video-card" onclick="playVideo('QoRXJ4EB5nc', 'Southampton Oceanfront')">
-            <img src="https://img.youtube.com/vi/QoRXJ4EB5nc/maxresdefault.jpg" alt="Southampton Oceanfront" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-            <div class="video-play-btn">
-              <div class="video-play-icon">▶</div>
-            </div>
-            <div class="video-title">Southampton Oceanfront</div>
-          </div>
-          <div class="video-card" onclick="playVideo('4YG90yuLRqE', 'Calf Creek')">
-            <img src="https://img.youtube.com/vi/4YG90yuLRqE/maxresdefault.jpg" alt="Calf Creek" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-            <div class="video-play-btn">
-              <div class="video-play-icon">▶</div>
-            </div>
-            <div class="video-title">Calf Creek</div>
-          </div>
-          <div class="video-card" onclick="playVideo('BUqHnnqEEHM', 'Sag Harbor Bay')">
-            <img src="https://img.youtube.com/vi/BUqHnnqEEHM/maxresdefault.jpg" alt="Sag Harbor Bay" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-            <div class="video-play-btn">
-              <div class="video-play-icon">▶</div>
-            </div>
-            <div class="video-title">Sag Harbor Bay</div>
-          </div>
-          <div class="video-card" onclick="playVideo('b-qBq0AmVo0', 'Shooting Star')">
-            <img src="https://img.youtube.com/vi/b-qBq0AmVo0/maxresdefault.jpg" alt="Shooting Star" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-            <div class="video-play-btn">
-              <div class="video-play-icon">▶</div>
-            </div>
-            <div class="video-title">Shooting Star</div>
-          </div>
-          <div class="video-card" onclick="playVideo('1yQ68U4sHb8', 'Ferry Road')">
-            <img src="https://img.youtube.com/vi/1yQ68U4sHb8/maxresdefault.jpg" alt="Ferry Road" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-            <div class="video-play-btn">
-              <div class="video-play-icon">▶</div>
-            </div>
-            <div class="video-title">Ferry Road</div>
-          </div>
-        </div>
-
-        <p style="color: var(--muted); font-size: 0.8rem; text-align: center; margin-top: 2.5rem; line-height: 1.6;">
-          All video content © Blaze Makoid Architecture. Used for professional reference purposes only to demonstrate project experience and design contribution.
-          If you are a representative of Blaze Makoid Architecture and wish to discuss the use of this content,
-          please <a href="#" onclick="navigate('contact'); return false;" style="color: var(--gold); text-decoration: none;">contact me directly</a>.
-        </p>
-      </div>
-    </div>
-
-    <!-- TAB 3: PORTFOLIO DOWNLOADS -->
+    <!-- TAB 2: PORTFOLIO DOWNLOADS -->
     <div id="downloads" class="tab-content">
       <div class="container">
         <h2>Documentation & Credentials</h2>
@@ -2494,6 +2530,39 @@
               <button class="btn btn-primary accordion-cta" onclick="navigate('contact')">Request a Media Package →</button>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section class="process-section">
+      <div class="container">
+        <div class="eyebrow">How It Works</div>
+        <h2>From First Call to<br>Certificate of Occupancy.</h2>
+        <div class="process-grid">
+          <div class="process-step reveal">
+            <div class="process-num">01</div>
+            <h3>Discovery</h3>
+            <p>A focused 30-minute call to discuss your vision, site conditions, budget, and timeline. No obligations — this is where we figure out if we're the right fit for each other.</p>
+          </div>
+          <div class="process-step reveal">
+            <div class="process-num">02</div>
+            <h3>Design</h3>
+            <p>Schematic massing, floor plan concepts, and material direction — developed directly with you. Nothing advances until you've reviewed and approved every decision.</p>
+          </div>
+          <div class="process-step reveal">
+            <div class="process-num">03</div>
+            <h3>Documentation</h3>
+            <p>Full construction document sets, permit submissions, and agency coordination. Contractor-ready drawings with zero ambiguity — because ambiguity costs money on a job site.</p>
+          </div>
+          <div class="process-step reveal">
+            <div class="process-num">04</div>
+            <h3>Delivery</h3>
+            <p>Construction administration from groundbreaking through final inspection and certificate of occupancy. I'm on site, reviewing submittals, and protecting your investment to the end.</p>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 3.5rem;">
+          <button class="btn btn-primary" onclick="navigate('contact')">Start the Conversation →</button>
         </div>
       </div>
     </section>
