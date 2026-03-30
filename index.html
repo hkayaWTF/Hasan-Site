@@ -141,6 +141,20 @@
       color: var(--white);
       letter-spacing: 0.15em;
       text-shadow: 0 1px 8px rgba(0,0,0,0.7), 0 0 2px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      line-height: 1;
+    }
+
+    .nav-tagline {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.55);
+      font-weight: 400;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+      text-transform: uppercase;
     }
 
     .nav-links {
@@ -176,17 +190,21 @@
     }
 
     .nav-cta {
-      background: var(--gold);
-      color: var(--black);
-      padding: 0.75rem 1.5rem;
-      font-size: 0.9rem;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.65rem 1.4rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out);
+      text-shadow: none;
     }
 
     .nav-cta:hover {
-      background: var(--gold-light);
+      background: var(--gold);
       color: var(--black);
     }
 
@@ -269,8 +287,8 @@
       min-height: 100vh;
       padding-top: 68px;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-end;
+      justify-content: flex-start;
       overflow: hidden;
       position: relative;
       background: url('hero01.png') center/cover no-repeat;
@@ -280,23 +298,20 @@
       position: relative;
       z-index: 2;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(3rem, 8vh, 7rem) clamp(2rem, 5vw, 6rem);
+      align-items: flex-end;
+      padding: clamp(3rem, 6vh, 5rem) clamp(2rem, 5vw, 6rem) clamp(3.5rem, 7vh, 6rem);
+      max-width: 680px;
       width: 100%;
     }
 
-    /* Top vignette — keeps nav readable without darkening the main image */
+    /* Top + left scrim — nav readable; text always legible */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.50) 0%,
-        rgba(0,0,0,0.10) 18%,
-        rgba(0,0,0,0.0)  32%
-      );
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.0) 28%),
+        linear-gradient(to right, rgba(20,18,15,0.62) 0%, rgba(20,18,15,0.38) 35%, rgba(20,18,15,0.0) 62%);
       z-index: 1;
       pointer-events: none;
     }
@@ -304,14 +319,20 @@
     .hero-right { display: none; }
 
     .hero-text {
-      text-align: center;
-      max-width: 700px;
+      text-align: left;
+      max-width: 580px;
+    }
+
+    @media (max-width: 600px) {
+      .hero-text {
+        max-width: 100%;
+      }
     }
 
     .hero-kicker {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 1rem;
       margin-bottom: 2rem;
     }
@@ -326,12 +347,7 @@
     }
 
     .hero-kicker::after {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 1px;
-      background: var(--gold);
-      flex-shrink: 0;
+      display: none;
     }
 
     .eyebrow {
@@ -349,38 +365,37 @@
       color: var(--white);
       margin-bottom: 1.75rem;
       letter-spacing: -0.02em;
-      text-shadow:
-        0 2px 4px rgba(0,0,0,0.90),
-        0 4px 24px rgba(0,0,0,0.75),
-        0 0 60px rgba(0,0,0,0.50);
+      text-shadow: none;
     }
 
     .hero-divider {
       width: 40px;
       height: 1px;
       background: var(--gold);
-      margin: 0 auto 1.75rem;
+      margin: 0 0 1.75rem;
     }
 
     .hero-subhead {
       font-size: 1rem;
-      color: #ffffff;
+      color: rgba(255,255,255,0.85);
       margin-bottom: 2.75rem;
       line-height: 1.8;
       letter-spacing: 0.01em;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-      text-shadow:
-        0 1px 3px rgba(0,0,0,0.95),
-        0 2px 16px rgba(0,0,0,0.85),
-        0 0 40px rgba(0,0,0,0.60);
+      max-width: 420px;
+      text-shadow: none;
     }
 
     @media (max-width: 900px) {
       .hero {
-        background-position: 60% center;
+        background-position: 65% center;
+        align-items: flex-end;
       }
+      .hero::before {
+        background:
+          linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.0) 20%),
+          linear-gradient(to top, rgba(20,18,15,0.75) 0%, rgba(20,18,15,0.0) 55%);
+      }
+      .hero-left { max-width: 100%; padding-bottom: 3rem; }
       .hero-text { max-width: 100%; }
       .hero-subhead { max-width: 100%; }
     }
@@ -535,24 +550,25 @@
 
     /* ==================== PHILOSOPHY ==================== */
     .philosophy-section {
-      background: var(--charcoal);
-      padding: var(--section-v) var(--gutter);
+      background: #1A1814;
+      padding: clamp(5rem, 12vw, 10rem) var(--gutter);
       text-align: center;
     }
 
     .philosophy-quote {
       font-family: var(--serif);
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-style: italic;
+      color: #F5F0E8;
       max-width: 900px;
       margin: 0 auto 2rem;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .philosophy-attribution {
-      color: var(--muted);
+      color: #C9A96E;
       font-size: 0.95rem;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
     }
 
     /* ==================== TESTIMONIALS ==================== */
@@ -578,6 +594,8 @@
       padding: 2.5rem;
       border-radius: 2px;
       border-left: 2px solid var(--gold);
+      display: flex;
+      flex-direction: column;
     }
 
     .testimonial-card p:first-child {
@@ -585,6 +603,7 @@
       font-style: italic;
       margin-bottom: 1.5rem;
       line-height: 1.7;
+      flex: 1;
     }
 
     .testimonial-card .attribution {
@@ -596,14 +615,33 @@
     .testimonial-card .stars {
       color: var(--gold);
       font-size: 0.85rem;
+      margin-bottom: 1rem;
     }
+
+    /* Category badges */
+    .testimonial-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 2px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .badge-residential  { background: rgba(201,169,110,0.15); color: #C9A96E; border: 1px solid rgba(201,169,110,0.3); }
+    .badge-retail       { background: rgba(180,160,120,0.12); color: #B8A07A; border: 1px solid rgba(180,160,120,0.25); }
+    .badge-sacred       { background: rgba(140,170,160,0.12); color: #8CAAA0; border: 1px solid rgba(140,170,160,0.25); }
+    .badge-ev           { background: rgba(120,150,180,0.12); color: #7896B4; border: 1px solid rgba(120,150,180,0.25); }
+    .badge-media        { background: rgba(160,130,180,0.12); color: #A082B4; border: 1px solid rgba(160,130,180,0.25); }
 
     .testimonial-hidden {
       display: none;
     }
 
     .testimonial-hidden.shown {
-      display: block;
+      display: flex;
     }
 
     .show-more-btn {
@@ -944,6 +982,35 @@
       border-color: var(--gold);
     }
 
+    /* Step 01 — Discovery: visually prominent */
+    .process-step.step-featured {
+      background: rgba(201,169,110,0.06);
+      border-top: 2px solid var(--gold);
+      padding: 1.75rem 1.5rem 1.5rem;
+      border-radius: 2px;
+    }
+
+    .process-step.step-featured .process-num {
+      opacity: 0.6;
+    }
+
+    .process-step.step-featured h3 {
+      font-size: 1.25rem;
+    }
+
+    .step-no-obligation {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.25);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      margin-top: 0.75rem;
+    }
+
     .process-num {
       font-size: 2.5rem;
       font-weight: 700;
@@ -978,24 +1045,49 @@
       }
     }
 
-    .card-img-coming-soon {
-      background: #111 !important;
-      background-image: none !important;
+    /* Styled portfolio placeholders */
+    .card-placeholder {
+      position: absolute;
+      inset: 0;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 0.75rem;
     }
 
-    .card-img-coming-soon::after {
-      content: 'Image Coming Soon';
-      color: var(--muted-light);
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
+    .card-placeholder-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      font-family: var(--font-body);
-      border: 1px solid var(--border-dim);
-      padding: 0.5rem 1rem;
+      font-family: var(--sans);
+      padding: 0.4rem 0.9rem;
       border-radius: 2px;
+      font-weight: 500;
+    }
+
+    .card-placeholder-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      font-family: var(--sans);
+    }
+
+    /* EV & Commercial placeholder */
+    .card-ph-commercial {
+      background: linear-gradient(135deg, #1C2530 0%, #2C3A4A 100%);
+    }
+    .card-ph-commercial .card-placeholder-label {
+      color: #7896B4; background: rgba(120,150,180,0.15); border: 1px solid rgba(120,150,180,0.3);
+    }
+
+    /* Sacred Architecture placeholder */
+    .card-ph-sacred {
+      background: linear-gradient(135deg, #1E1C14 0%, #2E2A1C 100%);
+    }
+    .card-ph-sacred .card-placeholder-label {
+      color: #C9A96E; background: rgba(201,169,110,0.12); border: 1px solid rgba(201,169,110,0.25);
     }
 
     .download-card {
@@ -1167,6 +1259,32 @@
       left: 0;
       color: var(--gold);
     }
+
+    .accordion-list-items .bullet-extra {
+      display: none;
+    }
+
+    .accordion-list-items.expanded .bullet-extra {
+      display: list-item;
+    }
+
+    .scope-toggle {
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 0.82rem;
+      cursor: pointer;
+      padding: 0.25rem 0;
+      letter-spacing: 0.04em;
+      font-family: var(--sans);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+      transition: opacity 0.2s;
+    }
+
+    .scope-toggle:hover { opacity: 0.75; }
 
     .credential-box {
       background: rgba(201, 169, 110, 0.08);
@@ -1431,35 +1549,50 @@
 
     .capabilities-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem 4rem;
       margin-bottom: 3rem;
+    }
+
+    @media (max-width: 900px) {
+      .capabilities-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     }
 
     .capability-column h3 {
       color: var(--gold);
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.05em;
+      font-size: 0.8rem;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-dim);
+      padding-bottom: 0.75rem;
     }
 
-    .capability-column ul {
-      list-style: none;
+    .cap-labels {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
-    .capability-column li {
+    .cap-label {
+      font-size: 0.88rem;
       color: var(--muted-light);
-      padding: 0.5rem 0;
-      padding-left: 1.25rem;
-      position: relative;
-      line-height: 1.6;
+      padding: 0.4rem 0;
+      line-height: 1.4;
     }
 
-    .capability-column li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
+    /* Gold highlight badge for standout skills */
+    .cap-label.cap-badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+      width: fit-content;
     }
 
     /* WHY HASAN SECTION */
@@ -1963,7 +2096,10 @@
 
   <!-- ==================== NAVIGATION ==================== -->
   <nav>
-    <div class="nav-wordmark" onclick="navigate('home')" style="cursor:pointer;">HASAN KAYA</div>
+    <div class="nav-wordmark" onclick="navigate('home')" style="cursor:pointer;">
+      HASAN KAYA
+      <span class="nav-tagline">NY Licensed Architect · Long Island & NYC</span>
+    </div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#" onclick="navigate('work'); return false;" class="nav-link" data-page="work">Work</a></li>
       <li><a href="#" onclick="navigate('services'); return false;" class="nav-link" data-page="services">Services</a></li>
@@ -2023,16 +2159,16 @@
     <!-- STATS -->
     <section class="stats-section">
       <div class="stat-item reveal">
-        <div class="stat-number" data-count="15" data-suffix="+">0</div>
+        <div class="stat-number">15+</div>
         <div class="stat-label">Years of Practice</div>
       </div>
       <div class="stat-item reveal">
-        <div class="stat-number" data-count="30" data-suffix="+">0</div>
+        <div class="stat-number">30+</div>
         <div class="stat-label">Projects Delivered</div>
       </div>
       <div class="stat-item reveal">
-        <div class="stat-number" data-count="5" data-suffix="">0</div>
-        <div class="stat-label">Disciplines Mastered</div>
+        <div class="stat-number">5</div>
+        <div class="stat-label">Practice Areas</div>
       </div>
       <div class="stat-item reveal">
         <div class="stat-number">$2M–$20M+</div>
@@ -2043,7 +2179,7 @@
     <!-- DISCIPLINES -->
     <section class="disciplines-section">
       <div class="container">
-        <h2>Five Disciplines.<br>One Standard of Excellence.</h2>
+        <h2>Five Disciplines.<br>One Point of Contact.</h2>
         <div class="discipline-grid">
           <div class="discipline-card reveal">
             <h4>Residential</h4>
@@ -2085,64 +2221,73 @@
     <!-- TESTIMONIALS -->
     <section class="testimonials-section">
       <div class="container">
-        <h2>Trusted by those who demand the best.</h2>
+        <h2>What clients say.</h2>
         <div class="testimonials-grid" id="testimonialGrid">
           <div class="testimonial-card reveal">
+            <span class="testimonial-badge badge-residential">Residential</span>
             <p>"Hasan transformed our vision for an East Hampton retreat into something we never imagined possible. Every detail — from site orientation to the last light fixture — felt inevitable. He was our sole point of contact throughout, which made everything seamless."</p>
+            <div class="stars">★★★★★</div>
             <div class="attribution">M. & J. Thornton</div>
             <div class="attribution">East Hampton Residence</div>
-            <div class="stars">★★★★★</div>
           </div>
           <div class="testimonial-card reveal">
+            <span class="testimonial-badge badge-residential">Residential</span>
             <p>"Working with someone who understands both the art and the business of building is rare. Our Bridgehampton project came in on time, under budget, and earned a regional design award. He protected our investment at every turn."</p>
+            <div class="stars">★★★★★</div>
             <div class="attribution">R. Adler</div>
             <div class="attribution">Bridgehampton Estate</div>
-            <div class="stars">★★★★★</div>
           </div>
           <div class="testimonial-card reveal">
+            <span class="testimonial-badge badge-retail">Retail & QSR</span>
             <p>"I've worked with architects on over 40 store locations. Hasan is the rare one who understands brand compliance, timeline, and budget without sacrificing design quality. Every location he delivered was on-brand, on time, on budget."</p>
+            <div class="stars">★★★★★</div>
             <div class="attribution">Senior Development Director</div>
             <div class="attribution">National Coffee Chain</div>
-            <div class="stars">★★★★★</div>
           </div>
           <div class="testimonial-card testimonial-hidden reveal">
+            <span class="testimonial-badge badge-media">Media</span>
             <p>"The 3D walkthrough Hasan produced before we broke ground was indistinguishable from the finished home. When construction was complete, it looked exactly like the rendering. That kind of precision builds trust that is very hard to find."</p>
+            <div class="stars">★★★★★</div>
             <div class="attribution">The Nakamura Family</div>
             <div class="attribution">Southampton</div>
-            <div class="stars">★★★★★</div>
           </div>
           <div class="testimonial-card testimonial-hidden reveal">
+            <span class="testimonial-badge badge-retail">Retail & QSR</span>
             <p>"Our flagship location is now a destination in its own right. Customers photograph the space as often as they do the product. That's what happens when architecture is treated as a strategic asset, not a construction expense."</p>
+            <div class="stars">★★★★★</div>
             <div class="attribution">VP Real Estate</div>
             <div class="attribution">Premium Hospitality Group</div>
-            <div class="stars">★★★★★</div>
           </div>
           <div class="testimonial-card testimonial-hidden reveal">
+            <span class="testimonial-badge badge-ev">EV & Commercial</span>
             <p>"The design Hasan developed for our EV charging hub prototype set a new standard for how this category can look and function. Every decision was measured against performance and investment return."</p>
+            <div class="stars">★★★★★</div>
             <div class="attribution">VP Development</div>
             <div class="attribution">National Energy Developer</div>
-            <div class="stars">★★★★★</div>
           </div>
           <div class="testimonial-card testimonial-hidden reveal">
+            <span class="testimonial-badge badge-sacred">Sacred Architecture</span>
             <p>"Hasan brought both technical mastery and genuine cultural sensitivity to our community center project. He listened first and designed second. The result is a space that honors our faith and serves our community for generations."</p>
+            <div class="stars">★★★★★</div>
             <div class="attribution">Board President</div>
             <div class="attribution">Long Island Islamic Center</div>
-            <div class="stars">★★★★★</div>
           </div>
           <div class="testimonial-card testimonial-hidden reveal">
+            <span class="testimonial-badge badge-media">Media</span>
             <p>"The MLS photography, drone footage, and 3D virtual tour Hasan produced for our listing resulted in a full-asking-price sale within 72 hours of going live."</p>
+            <div class="stars">★★★★★</div>
             <div class="attribution">Licensed Real Estate Broker</div>
             <div class="attribution">The Hamptons</div>
-            <div class="stars">★★★★★</div>
           </div>
           <div class="testimonial-card testimonial-hidden reveal">
+            <span class="testimonial-badge badge-retail">Retail & QSR</span>
             <p>"We gave Hasan a 14-week schedule that every other firm said was impossible. He delivered with two weeks to spare, fully brand-compliant. He is the best retail architect I've worked with."</p>
+            <div class="stars">★★★★★</div>
             <div class="attribution">Director of Expansion</div>
             <div class="attribution">QSR Brand</div>
-            <div class="stars">★★★★★</div>
           </div>
         </div>
-        <button class="btn btn-ghost btn-small show-more-btn" id="showMoreBtn" onclick="toggleTestimonials()">Show More Testimonials</button>
+        <button class="btn btn-ghost btn-small show-more-btn" id="showMoreBtn" onclick="toggleTestimonials()">Show More</button>
       </div>
     </section>
 
@@ -2198,7 +2343,7 @@
           <!-- RESIDENTIAL — real project films (Blaze Makoid Architecture) -->
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('nTbdcpO0y9w','Sagaponack Compound')" style="cursor:pointer;">
             <div class="card-img">
-              <img src="https://img.youtube.com/vi/nTbdcpO0y9w/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/nTbdcpO0y9w/hqdefault.jpg'" alt="Sagaponack Compound" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              <img src="https://img.youtube.com/vi/nTbdcpO0y9w/hqdefault.jpg" onerror="this.src='https://img.youtube.com/vi/nTbdcpO0y9w/hqdefault.jpg'" alt="Sagaponack Compound" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
             </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
@@ -2210,7 +2355,7 @@
 
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('QoRXJ4EB5nc','Southampton Oceanfront')" style="cursor:pointer;">
             <div class="card-img">
-              <img src="https://img.youtube.com/vi/QoRXJ4EB5nc/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/QoRXJ4EB5nc/hqdefault.jpg'" alt="Southampton Oceanfront" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              <img src="https://img.youtube.com/vi/QoRXJ4EB5nc/hqdefault.jpg" onerror="this.src='https://img.youtube.com/vi/QoRXJ4EB5nc/hqdefault.jpg'" alt="Southampton Oceanfront" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
             </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
@@ -2222,7 +2367,7 @@
 
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('4YG90yuLRqE','Calf Creek')" style="cursor:pointer;">
             <div class="card-img">
-              <img src="https://img.youtube.com/vi/4YG90yuLRqE/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/4YG90yuLRqE/hqdefault.jpg'" alt="Calf Creek" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              <img src="https://img.youtube.com/vi/4YG90yuLRqE/hqdefault.jpg" onerror="this.src='https://img.youtube.com/vi/4YG90yuLRqE/hqdefault.jpg'" alt="Calf Creek" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
             </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
@@ -2234,7 +2379,7 @@
 
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('BUqHnnqEEHM','Sag Harbor Bay')" style="cursor:pointer;">
             <div class="card-img">
-              <img src="https://img.youtube.com/vi/BUqHnnqEEHM/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/BUqHnnqEEHM/hqdefault.jpg'" alt="Sag Harbor Bay" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              <img src="https://img.youtube.com/vi/BUqHnnqEEHM/hqdefault.jpg" onerror="this.src='https://img.youtube.com/vi/BUqHnnqEEHM/hqdefault.jpg'" alt="Sag Harbor Bay" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
             </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
@@ -2246,7 +2391,7 @@
 
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('b-qBq0AmVo0','Shooting Star')" style="cursor:pointer;">
             <div class="card-img">
-              <img src="https://img.youtube.com/vi/b-qBq0AmVo0/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/b-qBq0AmVo0/hqdefault.jpg'" alt="Shooting Star" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              <img src="https://img.youtube.com/vi/b-qBq0AmVo0/hqdefault.jpg" onerror="this.src='https://img.youtube.com/vi/b-qBq0AmVo0/hqdefault.jpg'" alt="Shooting Star" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
             </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
@@ -2258,7 +2403,7 @@
 
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('1yQ68U4sHb8','Ferry Road')" style="cursor:pointer;">
             <div class="card-img">
-              <img src="https://img.youtube.com/vi/1yQ68U4sHb8/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/1yQ68U4sHb8/hqdefault.jpg'" alt="Ferry Road" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              <img src="https://img.youtube.com/vi/1yQ68U4sHb8/hqdefault.jpg" onerror="this.src='https://img.youtube.com/vi/1yQ68U4sHb8/hqdefault.jpg'" alt="Ferry Road" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
             </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
@@ -2325,7 +2470,12 @@
 
           <!-- COMMERCIAL -->
           <div class="portfolio-card reveal" data-category="commercial">
-            <div class="card-img card-img-coming-soon"></div>
+            <div class="card-img card-ph-commercial">
+              <div class="card-placeholder">
+                <span class="card-placeholder-label">EV Infrastructure</span>
+                <span class="card-placeholder-sub">Photography coming soon</span>
+              </div>
+            </div>
             <div class="card-overlay">
               <div class="card-label">EV Infrastructure</div>
               <div class="card-title">EV Charging Hub — National Prototype</div>
@@ -2334,7 +2484,12 @@
           </div>
 
           <div class="portfolio-card reveal" data-category="commercial">
-            <div class="card-img card-img-coming-soon"></div>
+            <div class="card-img card-ph-commercial">
+              <div class="card-placeholder">
+                <span class="card-placeholder-label">EV Infrastructure</span>
+                <span class="card-placeholder-sub">Photography coming soon</span>
+              </div>
+            </div>
             <div class="card-overlay">
               <div class="card-label">EV Infrastructure</div>
               <div class="card-title">Next-Gen Fuel Station</div>
@@ -2343,7 +2498,12 @@
           </div>
 
           <div class="portfolio-card reveal" data-category="commercial">
-            <div class="card-img card-img-coming-soon"></div>
+            <div class="card-img card-ph-commercial">
+              <div class="card-placeholder">
+                <span class="card-placeholder-label">Commercial</span>
+                <span class="card-placeholder-sub">Photography coming soon</span>
+              </div>
+            </div>
             <div class="card-overlay">
               <div class="card-label">Commercial</div>
               <div class="card-title">Mixed-Use Commercial Development</div>
@@ -2353,7 +2513,12 @@
 
           <!-- SACRED -->
           <div class="portfolio-card reveal" data-category="sacred">
-            <div class="card-img card-img-coming-soon"></div>
+            <div class="card-img card-ph-sacred">
+              <div class="card-placeholder">
+                <span class="card-placeholder-label">Sacred Architecture</span>
+                <span class="card-placeholder-sub">Photography coming soon</span>
+              </div>
+            </div>
             <div class="card-overlay">
               <div class="card-label">Sacred Architecture</div>
               <div class="card-title">Long Island Islamic Center</div>
@@ -2362,7 +2527,12 @@
           </div>
 
           <div class="portfolio-card reveal" data-category="sacred">
-            <div class="card-img card-img-coming-soon"></div>
+            <div class="card-img card-ph-sacred">
+              <div class="card-placeholder">
+                <span class="card-placeholder-label">Sacred Architecture</span>
+                <span class="card-placeholder-sub">Photography coming soon</span>
+              </div>
+            </div>
             <div class="card-overlay">
               <div class="card-label">Sacred Architecture</div>
               <div class="card-title">New Jersey Islamic Foundation</div>
@@ -2371,7 +2541,12 @@
           </div>
 
           <div class="portfolio-card reveal" data-category="sacred">
-            <div class="card-img card-img-coming-soon"></div>
+            <div class="card-img card-ph-sacred">
+              <div class="card-placeholder">
+                <span class="card-placeholder-label">Sacred Architecture</span>
+                <span class="card-placeholder-sub">Photography coming soon</span>
+              </div>
+            </div>
             <div class="card-overlay">
               <div class="card-label">Sacred Architecture</div>
               <div class="card-title">Suffolk County Islamic Cultural Center</div>
@@ -2380,8 +2555,8 @@
           </div>
         </div>
 
-        <p style="text-align: center; color: var(--muted-light); margin-top: 3rem; font-size: 0.95rem;">Photography and full case studies available upon request.</p>
-        <p id="bma-note" style="display:none; text-align: center; color: var(--muted); margin-top: 1rem; font-size: 0.78rem; line-height: 1.6;">Residential films © <a href="https://blazemakoid.com" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Blaze Makoid Architecture</a>. Shared to illustrate project scale, design caliber, and construction quality representative of my contributions during tenure at BMA.</p>
+        <p style="text-align: center; color: var(--muted); margin-top: 3rem; font-size: 0.85rem; font-style: italic; border-top: 1px solid var(--border-dim); padding-top: 1.5rem;">Photography and full case studies available upon request.</p>
+        <p id="bma-note" style="display:none; text-align: center; color: rgba(168,168,168,0.55); margin-top: 0.75rem; font-size: 0.7rem; line-height: 1.7; font-style: italic;">Residential films © <a href="https://blazemakoid.com" target="_blank" rel="noopener" style="color:rgba(201,169,110,0.7);text-decoration:none;">Blaze Makoid Architecture</a>. Shared to illustrate project scale, design caliber, and construction quality representative of my contributions during tenure at BMA.</p>
       </div>
     </div>
 
@@ -2450,28 +2625,31 @@
                 <li>Schematic Design — site analysis, massing studies, conceptual layouts tailored to your vision and lifestyle</li>
                 <li>Design Development — refined plans, material palettes, structural coordination, and client approval packages</li>
                 <li>Construction Documents — permit-ready, contractor-ready drawing sets with full specifications</li>
-                <li>Permit Submission — agency coordination, variance strategy, and expedited review management</li>
-                <li>Construction Administration — site visits, RFI responses, shop drawing review, and punch list</li>
-                <li>Landscape Architecture — pool design, hardscape, planting, outdoor living and privacy screening</li>
+                <li class="bullet-extra">Permit Submission — agency coordination, variance strategy, and expedited review management</li>
+                <li class="bullet-extra">Construction Administration — site visits, RFI responses, shop drawing review, and punch list</li>
+                <li class="bullet-extra">Landscape Architecture — pool design, hardscape, planting, outdoor living and privacy screening</li>
               </ul>
+              <button class="scope-toggle" onclick="toggleScope(this)">View full scope ↓</button>
 
               <div class="accordion-section-title">Beyond Architecture</div>
               <ul class="accordion-list-items">
                 <li>Architectural Lighting Design — interior and exterior illumination strategies that elevate the experience of every space</li>
                 <li>Electrical Systems Coordination — complete electrical planning integrated with smart home and AV systems</li>
                 <li>Interior Architecture — space planning, ceiling design, built-in millwork, and finish material direction</li>
-                <li>Zoning & Variance Strategy — maximizing buildable area while navigating local code with precision</li>
+                <li class="bullet-extra">Zoning & Variance Strategy — maximizing buildable area while navigating local code with precision</li>
               </ul>
+              <button class="scope-toggle" onclick="toggleScope(this)">View full scope ↓</button>
 
               <div class="accordion-section-title">Media & Marketing</div>
               <ul class="accordion-list-items">
                 <li>MLS Photography & Video — professional interior and exterior, optimized for the Hamptons market</li>
                 <li>Twilight Photography — cinematic dusk exteriors that command premium attention</li>
                 <li>Aerial Drone Photography & 4K Video — FAA-compliant, high-resolution property aerials</li>
-                <li>3D Renderings & Visualizations — photorealistic pre-construction visuals for client approval and marketing</li>
-                <li>Virtual Walkthrough Tours — interactive 3D buyer experience before a single shovel breaks ground</li>
-                <li>Real Estate Marketing Materials — listing brochures, digital packages, and social content</li>
+                <li class="bullet-extra">3D Renderings & Visualizations — photorealistic pre-construction visuals for client approval and marketing</li>
+                <li class="bullet-extra">Virtual Walkthrough Tours — interactive 3D buyer experience before a single shovel breaks ground</li>
+                <li class="bullet-extra">Real Estate Marketing Materials — listing brochures, digital packages, and social content</li>
               </ul>
+              <button class="scope-toggle" onclick="toggleScope(this)">View full scope ↓</button>
 
               <div class="process-flow">Process: SD → DD → CDs → Permit → CA</div>
 
@@ -2505,11 +2683,12 @@
                 <li>Site Analysis & Brand Compliance — feasibility review, brand standards audit, and fit-gap analysis before you commit capital</li>
                 <li>Prototype Design — ground-up brand-compliant prototypes optimized for your operational and customer experience requirements</li>
                 <li>Drive-Thru Site Planning — traffic flow, stacking, ADA compliance, and efficiency-first layout design</li>
-                <li>Tenant Improvement Drawings — landlord-coordinated TI packages for inline and freestanding locations</li>
-                <li>Permit Acquisition — local jurisdiction navigation across NY, NJ, CT, MA, and Mid-Atlantic states</li>
-                <li>Construction Administration — on-site quality control aligned with corporate brand standards</li>
-                <li>Multi-Location Rollout Management — simultaneous permitting and design management across multiple sites</li>
+                <li class="bullet-extra">Tenant Improvement Drawings — landlord-coordinated TI packages for inline and freestanding locations</li>
+                <li class="bullet-extra">Permit Acquisition — local jurisdiction navigation across NY, NJ, CT, MA, and Mid-Atlantic states</li>
+                <li class="bullet-extra">Construction Administration — on-site quality control aligned with corporate brand standards</li>
+                <li class="bullet-extra">Multi-Location Rollout Management — simultaneous permitting and design management across multiple sites</li>
               </ul>
+              <button class="scope-toggle" onclick="toggleScope(this)">View full scope ↓</button>
 
               <button class="btn btn-primary accordion-cta" onclick="navigate('contact')">Start a Retail Project →</button>
             </div>
@@ -2537,11 +2716,12 @@
                 <li>Feasibility Audit — site analysis, utility capacity review, and ROI modeling to validate the investment before design begins</li>
                 <li>EV Site Planning — charger placement, traffic circulation, accessibility, and future-phase expansion planning</li>
                 <li>Canopy Architecture — custom-engineered canopy systems that elevate the site into a landmark asset</li>
-                <li>Gas Station Conversion — full conversion documentation from existing fuel infrastructure to EV/QSR hybrid programs</li>
-                <li>NYC Local Law 55 Compliance — specialized compliance documentation for NYC energy infrastructure projects</li>
-                <li>Agency Coordination — DOT, DEC, DOB, local planning board, and utility company coordination</li>
-                <li>Stamped Permit Sets — engineer-of-record coordination and jurisdiction-ready permit documentation</li>
+                <li class="bullet-extra">Gas Station Conversion — full conversion documentation from existing fuel infrastructure to EV/QSR hybrid programs</li>
+                <li class="bullet-extra">NYC Local Law 55 Compliance — specialized compliance documentation for NYC energy infrastructure projects</li>
+                <li class="bullet-extra">Agency Coordination — DOT, DEC, DOB, local planning board, and utility company coordination</li>
+                <li class="bullet-extra">Stamped Permit Sets — engineer-of-record coordination and jurisdiction-ready permit documentation</li>
               </ul>
+              <button class="scope-toggle" onclick="toggleScope(this)">View full scope ↓</button>
 
               <div class="process-flow">Process: Feasibility → Schematic Design → Agency Coordination → Permit Submission</div>
 
@@ -2571,12 +2751,13 @@
                 <li>Community Engagement Process — facilitated stakeholder sessions to ensure every design decision reflects the community's vision and values</li>
                 <li>Cultural & Religious Programming — space planning that honors ritual requirements, acoustic needs, and gender separation with elegance</li>
                 <li>Prayer Hall Design — qibla orientation, muqarnas-inspired detailing, natural light strategy, and acoustic tuning</li>
-                <li>Minaret & Dome Design — structurally engineered landmark elements designed in authentic dialogue with tradition</li>
-                <li>Wudu Facility Design — code-compliant, dignified ablution spaces integrated seamlessly into the building program</li>
-                <li>Acoustic Design — engineered reverberation, sound distribution, and amplification system coordination</li>
-                <li>Full Permit Coordination — NYC DOB, local zoning boards, and landmark review where applicable</li>
-                <li>ADA Compliance — full accessibility integration without compromise to programmatic integrity</li>
+                <li class="bullet-extra">Minaret & Dome Design — structurally engineered landmark elements designed in authentic dialogue with tradition</li>
+                <li class="bullet-extra">Wudu Facility Design — code-compliant, dignified ablution spaces integrated seamlessly into the building program</li>
+                <li class="bullet-extra">Acoustic Design — engineered reverberation, sound distribution, and amplification system coordination</li>
+                <li class="bullet-extra">Full Permit Coordination — NYC DOB, local zoning boards, and landmark review where applicable</li>
+                <li class="bullet-extra">ADA Compliance — full accessibility integration without compromise to programmatic integrity</li>
               </ul>
+              <button class="scope-toggle" onclick="toggleScope(this)">View full scope ↓</button>
 
               <button class="btn btn-primary accordion-cta" onclick="navigate('contact')">Discuss Your Community Project →</button>
             </div>
@@ -2604,27 +2785,30 @@
                 <li>3D Architectural Renderings — photorealistic exterior and interior visuals that serve as creative direction documents, client approval tools, and marketing assets</li>
                 <li>Virtual Walkthrough Tours — interactive 3D experiences that allow buyers and clients to inhabit a space before it exists</li>
                 <li>Design Development Visualizations — concept-to-approval client presentations that build confidence and reduce revision cycles</li>
-                <li>Before & After Renovation Renderings — visual proof of concept for renovation projects and value-add developments</li>
+                <li class="bullet-extra">Before & After Renovation Renderings — visual proof of concept for renovation projects and value-add developments</li>
               </ul>
+              <button class="scope-toggle" onclick="toggleScope(this)">View full scope ↓</button>
 
               <div class="accordion-section-title">Real Estate Photography & Video</div>
               <ul class="accordion-list-items">
                 <li>MLS Photography — professional interior and exterior, staged and optimized for the Hamptons and Long Island market</li>
                 <li>Twilight Photography — cinematic dusk exteriors that command premium attention in listing feeds</li>
                 <li>Aerial Drone Photography — FAA Part 107 certified, high-resolution property aerials</li>
-                <li>4K Drone Video — cinematic flythrough and property overview video</li>
-                <li>Lifestyle Video Tour — full cinematic walkthrough with professional grade and color</li>
+                <li class="bullet-extra">4K Drone Video — cinematic flythrough and property overview video</li>
+                <li class="bullet-extra">Lifestyle Video Tour — full cinematic walkthrough with professional grade and color</li>
               </ul>
+              <button class="scope-toggle" onclick="toggleScope(this)">View full scope ↓</button>
 
               <div class="accordion-section-title">For Real Estate Brokers</div>
               <ul class="accordion-list-items">
                 <li>Pre-Listing Consultation — architectural assessment and recommendations to maximize listing value before going live</li>
                 <li>As-Built Floor Plans — accurate, MLS-ready redraws from existing documentation or site measurement</li>
                 <li>Digital Floor Plan Conversions — hand-drawn or CAD plans converted to clean, presentation-ready digital drawings</li>
-                <li>Virtual Staging — photorealistic digital staging of vacant or outdated spaces</li>
-                <li>Social Media Content Package — platform-ready stills and video cuts for Instagram, Facebook, YouTube</li>
-                <li>Agent Branding Package — branded bio photos, marketing templates, and visual identity assets</li>
+                <li class="bullet-extra">Virtual Staging — photorealistic digital staging of vacant or outdated spaces</li>
+                <li class="bullet-extra">Social Media Content Package — platform-ready stills and video cuts for Instagram, Facebook, YouTube</li>
+                <li class="bullet-extra">Agent Branding Package — branded bio photos, marketing templates, and visual identity assets</li>
               </ul>
+              <button class="scope-toggle" onclick="toggleScope(this)">View full scope ↓</button>
 
               <button class="btn btn-primary accordion-cta" onclick="navigate('contact')">Request a Media Package →</button>
             </div>
@@ -2639,10 +2823,11 @@
         <div class="eyebrow">How It Works</div>
         <h2>From First Call to<br>Certificate of Occupancy.</h2>
         <div class="process-grid">
-          <div class="process-step reveal">
+          <div class="process-step step-featured reveal">
             <div class="process-num">01</div>
             <h3>Discovery</h3>
-            <p>A focused 30-minute call to discuss your vision, site conditions, budget, and timeline. No obligations — this is where we figure out if we're the right fit for each other.</p>
+            <p>A focused 30-minute call to discuss your vision, site conditions, budget, and timeline. This is where we figure out if we're the right fit for each other.</p>
+            <span class="step-no-obligation">No obligation</span>
           </div>
           <div class="process-step reveal">
             <div class="process-num">02</div>
@@ -2789,45 +2974,45 @@
         <div class="capabilities-grid">
           <div class="capability-column reveal">
             <h3>Design</h3>
-            <ul>
-              <li>Spatial Composition & Massing</li>
-              <li>Luxury Aesthetics & Material Specification</li>
-              <li>3D Visualization & Photorealistic Rendering</li>
-              <li>Award-Winning Design Delivery</li>
-              <li>AI-Assisted Design Workflows</li>
-              <li>Custom Millwork & Interior Architecture</li>
-              <li>Site Planning & Landscape Coordination</li>
-              <li>Adaptive Reuse & Historic Renovation</li>
-              <li>Sacred & Cultural Architecture</li>
-            </ul>
+            <div class="cap-labels">
+              <span class="cap-label">Spatial Composition & Massing</span>
+              <span class="cap-label">Luxury Aesthetics & Material Specification</span>
+              <span class="cap-label">3D Visualization & Photorealistic Rendering</span>
+              <span class="cap-label">Award-Winning Design Delivery</span>
+              <span class="cap-label cap-badge">AI-Assisted Design Workflows</span>
+              <span class="cap-label">Custom Millwork & Interior Architecture</span>
+              <span class="cap-label">Site Planning & Landscape Coordination</span>
+              <span class="cap-label">Adaptive Reuse & Historic Renovation</span>
+              <span class="cap-label">Sacred & Cultural Architecture</span>
+            </div>
           </div>
           <div class="capability-column reveal">
             <h3>Strategy & Compliance</h3>
-            <ul>
-              <li>Capital Planning & Feasibility Analysis</li>
-              <li>Risk Mitigation & Value Engineering</li>
-              <li>NYS Building Code & IBC Compliance</li>
-              <li>Permitting Strategy & Agency Coordination</li>
-              <li>Zoning, FAR & Setback Analysis</li>
-              <li>Brand Standards Compliance (Starbucks, QSR)</li>
-              <li>ADA Accessibility & Life Safety</li>
-              <li>Variance & Landmark Applications</li>
-              <li>Owner's Rep & Design Advisory</li>
-            </ul>
+            <div class="cap-labels">
+              <span class="cap-label">Capital Planning & Feasibility Analysis</span>
+              <span class="cap-label">Risk Mitigation & Value Engineering</span>
+              <span class="cap-label">NYS Building Code & IBC Compliance</span>
+              <span class="cap-label">Permitting Strategy & Agency Coordination</span>
+              <span class="cap-label">Zoning, FAR & Setback Analysis</span>
+              <span class="cap-label cap-badge">NYC Local Law 55 Compliance</span>
+              <span class="cap-label cap-badge">Direct Starbucks NYC Corporate Coordination</span>
+              <span class="cap-label">ADA Accessibility & Life Safety</span>
+              <span class="cap-label">Variance & Landmark Applications</span>
+            </div>
           </div>
           <div class="capability-column reveal">
             <h3>Execution & Software</h3>
-            <ul>
-              <li>Full Construction Documentation (CD Sets)</li>
-              <li>BIM Coordination — Revit, BIM 360</li>
-              <li>AutoCAD · Rhino · SketchUp</li>
-              <li>Lumion · Enscape · V-Ray Rendering</li>
-              <li>Adobe Creative Suite (Ps, Ai, Id)</li>
-              <li>Construction Administration & Site CA</li>
-              <li>Contractor Bid & Procurement Support</li>
-              <li>RFI / Submittal Review & Punch Lists</li>
-              <li>Client Relations & Full Project Management</li>
-            </ul>
+            <div class="cap-labels">
+              <span class="cap-label">Full Construction Documentation (CD Sets)</span>
+              <span class="cap-label">BIM Coordination — Revit, BIM 360</span>
+              <span class="cap-label">AutoCAD · Rhino · SketchUp</span>
+              <span class="cap-label">Lumion · Enscape · V-Ray Rendering</span>
+              <span class="cap-label">Adobe Creative Suite (Ps, Ai, Id)</span>
+              <span class="cap-label">Construction Administration & Site CA</span>
+              <span class="cap-label">Contractor Bid & Procurement Support</span>
+              <span class="cap-label">RFI / Submittal Review & Punch Lists</span>
+              <span class="cap-label">Client Relations & Full Project Management</span>
+            </div>
           </div>
         </div>
       </div>
@@ -2865,7 +3050,7 @@
     <section class="contact-hero">
       <div class="container">
         <div class="eyebrow">Start a Project</div>
-        <h1>Ready to build something remarkable?</h1>
+        <h1>Let's start with a conversation.</h1>
       </div>
     </section>
 
@@ -2906,12 +3091,11 @@
       </div>
 
       <div class="contact-info">
-        <h3>All inquiries are handled personally by Hasan Kaya.</h3>
-        <p>I respond to every inquiry personally within 24 hours.</p>
+        <h3>Every inquiry is read and responded to personally within 24 hours.</h3>
 
         <div class="contact-item">
           <span class="contact-label">Email</span>
-          <div class="contact-value"><a href="mailto:hkaya928@gmail.com">hkaya928@gmail.com</a></div>
+          <div class="contact-value"><a href="mailto:hkaya928@gmail.com">hello@hasankaya.com</a></div>
         </div>
 
         <div class="contact-item">
@@ -2962,6 +3146,7 @@
           <li><a href="mailto:hkaya928@gmail.com">Email</a></li>
           <li><a href="tel:631-433-7773">Phone</a></li>
           <li><a href="https://linkedin.com/in/hkaya928" target="_blank">LinkedIn</a></li>
+          <li><a href="https://instagram.com/hasankaya.arch" target="_blank">Instagram</a></li>
           <li><a href="https://ovou.com/hasankaya" target="_blank">Portfolio</a></li>
         </ul>
         <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--muted);">Long Island · NYC · East Coast</p>
@@ -3184,24 +3369,16 @@ ${formData.get('message')}
       form.reset();
     }
 
-    // STATS COUNTER ANIMATION
+    // STATS FADE-IN (no count-up)
     function animateStats() {
-      const stats = document.querySelectorAll('.stat-number[data-count]');
-      stats.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-count'));
-        const suffix = stat.getAttribute('data-suffix') || '';
-        let current = 0;
-        const increment = Math.ceil(target / 50);
+      // Stats show their final values via reveal animation — no count-up
+    }
 
-        const counter = setInterval(() => {
-          current += increment;
-          if (current >= target) {
-            current = target;
-            clearInterval(counter);
-          }
-          stat.textContent = current + suffix;
-        }, 30);
-      });
+    // SCOPE TOGGLE (services bullet collapse)
+    function toggleScope(btn) {
+      const ul = btn.previousElementSibling;
+      const expanded = ul.classList.toggle('expanded');
+      btn.textContent = expanded ? 'View less ↑' : 'View full scope ↓';
     }
 
     // REVEAL ANIMATIONS
