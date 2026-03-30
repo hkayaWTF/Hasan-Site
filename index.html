@@ -276,8 +276,8 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.35) 100%),
-                  url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=2400&q=80') center/cover;
+      background: linear-gradient(135deg, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.4) 60%, rgba(10,10,10,0.25) 100%),
+                  url('hero%20image%2001.png') center/cover;
       z-index: -1;
     }
 
@@ -670,11 +670,14 @@
     }
 
     .card-img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       background-size: cover;
       background-position: center;
       transition: transform 0.4s var(--ease-out);
+      overflow: hidden;
     }
 
     .portfolio-card:hover .card-img {
@@ -2110,7 +2113,9 @@
         <div class="portfolio-grid" id="portfolioGrid">
           <!-- RESIDENTIAL — real project films (Blaze Makoid Architecture) -->
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('nTbdcpO0y9w','Sagaponack Compound')" style="cursor:pointer;">
-            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/nTbdcpO0y9w/maxresdefault.jpg')"></div>
+            <div class="card-img">
+              <img src="https://img.youtube.com/vi/nTbdcpO0y9w/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/nTbdcpO0y9w/hqdefault.jpg'" alt="Sagaponack Compound" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
@@ -2120,7 +2125,9 @@
           </div>
 
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('QoRXJ4EB5nc','Southampton Oceanfront')" style="cursor:pointer;">
-            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/QoRXJ4EB5nc/maxresdefault.jpg')"></div>
+            <div class="card-img">
+              <img src="https://img.youtube.com/vi/QoRXJ4EB5nc/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/QoRXJ4EB5nc/hqdefault.jpg'" alt="Southampton Oceanfront" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
@@ -2130,7 +2137,9 @@
           </div>
 
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('4YG90yuLRqE','Calf Creek')" style="cursor:pointer;">
-            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/4YG90yuLRqE/maxresdefault.jpg')"></div>
+            <div class="card-img">
+              <img src="https://img.youtube.com/vi/4YG90yuLRqE/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/4YG90yuLRqE/hqdefault.jpg'" alt="Calf Creek" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
@@ -2140,7 +2149,9 @@
           </div>
 
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('BUqHnnqEEHM','Sag Harbor Bay')" style="cursor:pointer;">
-            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/BUqHnnqEEHM/maxresdefault.jpg')"></div>
+            <div class="card-img">
+              <img src="https://img.youtube.com/vi/BUqHnnqEEHM/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/BUqHnnqEEHM/hqdefault.jpg'" alt="Sag Harbor Bay" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
@@ -2150,7 +2161,9 @@
           </div>
 
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('b-qBq0AmVo0','Shooting Star')" style="cursor:pointer;">
-            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/b-qBq0AmVo0/maxresdefault.jpg')"></div>
+            <div class="card-img">
+              <img src="https://img.youtube.com/vi/b-qBq0AmVo0/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/b-qBq0AmVo0/hqdefault.jpg'" alt="Shooting Star" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
@@ -2160,7 +2173,9 @@
           </div>
 
           <div class="portfolio-card video-portfolio-card reveal" data-category="residential" onclick="playVideo('1yQ68U4sHb8','Ferry Road')" style="cursor:pointer;">
-            <div class="card-img" style="background-image: url('https://img.youtube.com/vi/1yQ68U4sHb8/maxresdefault.jpg')"></div>
+            <div class="card-img">
+              <img src="https://img.youtube.com/vi/1yQ68U4sHb8/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/1yQ68U4sHb8/hqdefault.jpg'" alt="Ferry Road" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            </div>
             <div class="card-video-badge">▶ Film</div>
             <div class="card-overlay">
               <div class="card-label">Ultra-Luxury Residential</div>
@@ -2282,7 +2297,7 @@
         </div>
 
         <p style="text-align: center; color: var(--muted-light); margin-top: 3rem; font-size: 0.95rem;">Photography and full case studies available upon request.</p>
-        <p style="text-align: center; color: var(--muted); margin-top: 1rem; font-size: 0.78rem; line-height: 1.6;">Residential films © <a href="https://blazemakoid.com" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Blaze Makoid Architecture</a>. Shared to illustrate project scale, design caliber, and construction quality representative of my contributions during tenure at BMA.</p>
+        <p id="bma-note" style="display:none; text-align: center; color: var(--muted); margin-top: 1rem; font-size: 0.78rem; line-height: 1.6;">Residential films © <a href="https://blazemakoid.com" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Blaze Makoid Architecture</a>. Shared to illustrate project scale, design caliber, and construction quality representative of my contributions during tenure at BMA.</p>
       </div>
     </div>
 
@@ -2993,6 +3008,12 @@
           setTimeout(() => { card.style.display = 'none'; }, 250);
         }
       });
+
+      // Show BMA attribution only when residential filter is active
+      const bmaNote = document.getElementById('bma-note');
+      if (bmaNote) {
+        bmaNote.style.display = (category === 'residential') ? 'block' : 'none';
+      }
     }
 
     // TAB SWITCHING
